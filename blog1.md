@@ -6,7 +6,6 @@ Let's say we have those two classes:
 
 ```
 @Entity
-
 public class Foo {
 
         @Id
