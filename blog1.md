@@ -31,7 +31,6 @@ public class Foo {
 and
 ```
 @Entity
-
 public class FooDetails {
 
         @Id
