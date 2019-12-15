@@ -54,7 +54,7 @@ This exception is thrown when you try to modify list (in this case add element i
 Ok, let's give some time to that adding threads to finish their work so we can print elements when list is populated. 
 You may be tempted to call ```Thread.sleep(2000)``` method but this is wrong way. You cannot be sure that threads will finish their work in two seconds. Good way to solve this problem is calling ```thread.join()```. Now, your main thread will not proceed until thread where ```join``` method is called is not done. 
 
-####IMPORTANT: Don't do this
+#### IMPORTANT: Don't do this
 
 ```
 public class Main {
