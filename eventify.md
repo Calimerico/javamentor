@@ -1,62 +1,50 @@
 
-### SchemaManagementException: Export identifier [...] encountered more than once
+### Eventify specifikacija
 
-##### Problem
+Ja sam uradio nesto tj prekopirao sa neta malo odavde i 
+odande pa cu ti ubaciti skrinshotove kako to izgleda
+cisto da bi imao ideju sta pokusavam da napravim.
+To sto sam napravio izgleda dosta lose pa mi je zato potrebna pomoc.
 
-Let's say we have those two classes:
+To odprilike ovako nekako izgleda:
+![pocetna](pocetna.png)
 
-```
-@Entity
-public class Foo {
+Ako gledamo samo layout ja mislim da je ovo sa menijem gore, levo i glavnim sadrzajem dobra 
+stvar ali nekako ruzno izgleda jer mozda ja nisam lepo odradio margine,
+ proporcije, centriranje ili stagod. Ako mislis da postoji bolje resenje, 
+ moze da se uradi i drugacije.
 
-        @Id
-        private UUID id = UUID.randomUUID();
-    
-        @OneToMany
-        
-        private List<FooDetails> details;
-    
-        public void setDetails(List<FooDetails> details) {
-            this.details = details;
-        }
-    
-        public UUID getId() {
-            return id;
-        }
-    
-        public List<> getDetails() {
-            return details;
-        }
-}
-```
-and
-```
-@Entity
-public class FooDetails {
+Ovaj meni gore mozda i nije toliko los, mozda samo da se centriraju itemi i to je to.
 
-        @Id
-        private UUID id;
-        private String name;
-    
-        ...getters and setters
-}
-```
-If we try to save Foo, we will receive an exception(I am pasting just relevant part):
-```
-Caused by: org.hibernate.tool.schema.spi.SchemaManagementException: Export identifier [foo_details] encountered more than once
-	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.checkExportIdentifier(AbstractSchemaMigrator.java:487) ~[hibernate-core-5.4.9.Final.jar:5.4.9.Final]
-	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:68) ~[hibernate-core-5.4.9.Final.jar:5.4.9.Final]
-	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:207) ~[hibernate-core-5.4.9.Final.jar:5.4.9.Final]
-	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:114) ~[hibernate-core-5.4.9.Final.jar:5.4.9.Final]
-	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:184) ~[hibernate-core-5.4.9.Final.jar:5.4.9.Final]
-	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:73) ~[hibernate-core-5.4.9.Final.jar:5.4.9.Final]
-	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:320) ~[hibernate-core-5.4.9.Final.jar:5.4.9.Final]
-	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:462) ~[hibernate-core-5.4.9.Final.jar:5.4.9.Final]
-	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1237) ~[hibernate-core-5.4.9.Final.jar:5.4.9.Final]
-	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:58) ~[spring-orm-5.2.2.RELEASE.jar:5.2.2.RELEASE]
-	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:365) ~[spring-orm-5.2.2.RELEASE.jar:5.2.2.RELEASE]
-	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391) ~[spring-orm-5.2.2.RELEASE.jar:5.2.2.RELEASE]
-	... 20 common frames omitted
-```
-As you can see <a href="https://stackoverflow.com/questions/42630661/sql-strings-added-more-than-once-for-tablename">here</a> problem is that more than one entity start with the same prefix(in our case ```Foo``` and ```FooDetails```)
-If we just rename ```FooDetails``` to ```Details```, it will work perfectly.
+Forma levo sluzi da uneses filtere i kad kliknes search, u tabeli ti se prikazu
+samo oni eventi koji zadovoljavaju kriterijum. Generalno treba da ima jedna forma koja sadrzi 
+neka prosta polja poput datepicker-a, text input, select, checkbox i tako to. Deluje mi 
+od svih nabrojanih da je date picker najzahtevniji ali verujem da postoji neki online koji moze
+da se samo prekopira i da to izgleda manje vise lepo. 
+
+Tabela je manje vise funkcionalna, jedino sto je lose je sto vidis dole kod navigacije kako su mala
+slova, to treba da se poboljsa. Kad se klikne na ovaj plusic u ljubicastom divu, 
+treba da se otvori kao dijalog forma za insertovanje eventa(super bi bilo kad bi mogla da se reusuje ova sto smo je
+koristili za filtere samo da ubacimo druga polja)
+
+Kad se udje u jedan od evenata, treba neka strana na kojoj se lepo prikazuju neki atributi.
+
+Ti atributi nisu neki komplikovani nego npr: jedna slika eventa(nesto kao profilna), ime eventa, description, kad se odrzava, gde se odrzava itd...
+
+Tu istu formu gde prikazujem event, mogu da iskoristim i za prikaz user-a, samo da promenim polje.
+
+Na toj formi za prikaz eventa treba da postoji edit dugme koje kad kliknem otvara se forma za edit(opet mozemo da reusujemo onu formu sa pocetka)
+
+Znaci u sustini ono sto mi treba je jedan lep layout gde kad ubacim u taj layout glavni sadrzaj, footer ili menije da se oni lepo rasporede.
+
+Jedna lepa forma za edit gde mogu da editujem jednostavna polja po zelji.
+
+Jedna lepa forma za prikaz jednostavnih polja po zelji.
+
+Malo lepsi meni.
+
+Normalna tabela sa navigacijom.
+
+Treba mi samo dizajn, ja cu uraditi reducere,akcije, selektore itd.
+
+To je to. :)
