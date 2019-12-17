@@ -239,6 +239,7 @@ public class ValueHolder {
 ```
 Now, we are locking on private lock that no one else is having access to so evil thread cannot acquire it.
 
+#### Further reading 
 If this article was interesting for you, I would suggest you learn more about threads in three resources:
 
 - <a href="http://tutorials.jenkov.com/java-concurrency/index.html">Java Concurrency and Multithreading Tutorial</a>
