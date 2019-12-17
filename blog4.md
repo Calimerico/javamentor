@@ -4,7 +4,7 @@
 Imagine you have one hundred spring boot test classes. When you start all of your tests
 would you like to load application context for every class or would you like to reuse the same
 application context? 
-Since loading of application context take time(it can take much more than ten seconds)
+Since loading of the application context take time(it can take much more than ten seconds)
 you would like to reuse same application context.
 
 Spring is trying to reuse context but there are some situations where context cannot be reused.
