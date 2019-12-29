@@ -189,6 +189,24 @@ public class Main {
 
 }
 ```
+UpdaterThread class: 
+```
+public class UpdaterThread implements Runnable {
+    
+    private ValueHolder valueHolder;
+
+    public UpdaterThread(ValueHolder valueHolder) {
+        this.valueHolder = valueHolder;
+    }
+
+    @Override
+    public void run() {
+        for (int i = 0 ; i < 1000; i++) {
+            valueHolder.increment();
+        }
+    }
+}
+```
 And everything is "working". But here is the problem.
 
 ```
