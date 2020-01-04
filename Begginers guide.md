@@ -20,6 +20,34 @@ Zipping your project and sending like that is not a good idea. It is much better
 Be careful what you commit. Don't commit ```.idea``` files, ```.settings``` files, ```.metadata``` etc.
 Your commit messages should have sense at least. Commit messages like "I FIXED IT" are not good(although we all do write this kind of messages from time to time :) )
 
+##### Write unit and integration tests
+Tests can show you if your code have bug and also it acts as a documentation.
+If someone wants to see how to use your class it will be much easier for that person to take
+a look at test and see how class should be used.
+
+##### Start using javax.validation annotations
+Imagine creating method for sending http request to some external url. Params ```url``` and ```method```
+are mandatory and you should receive ```Exception``` if you pass ```null```.
+```
+public void sendRestCall(String url, String method) {
+    ... do something
+}
+```
+Better approach is this:
+```
+public void sendRestCall(@NotNull String url, @NotNull String method) {
+    String urlString = Objects.requireNonNull(url,"You must specify url")
+    String methodString = Objects.requireNonNull(method,"You must specify method")
+    ... do something
+}
+```
+This way when someone try to call you method like this:
+```
+obj.sendRestCall(null,"method")
+```
+your ```IDE``` will give you warning that you are calling method with ```null``` param. Also
+```requireNonNull``` method will throw ```NullPointerException``` if you pass null value to method.
+
 ##### Close your resources. Use try with resources block
 Consider this code:
 ```
