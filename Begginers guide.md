@@ -96,7 +96,13 @@ is warning you that even if code compile, something is not fine with it. Take a 
 them.
 ##### Your fields and variables should have proper name
 Don't name fields and variables ```a```, ```b```, ```field```, ```Map map = new HashMap()```.
+##### If you are writing new code, don't use ```@Deprecated``` methods or classes
+Also if you see that some method or class in your project was written in the past but now there is some new method or class that should be used instead,
+mark that old method or class with ```@Deprecated``` annotation. This way clients will know they are not supposed to use this method or class anymore.
 ##### Class name start with capital letter
+##### Don't forget to set raw type for class
+This is not fine: ```List listOfInts = new ArrayList();```.
+This is much better: ```List<Integer> listOfInts = new ArrayList<>();```
 ##### Don't use String or int where enum should be used
 
 ```
