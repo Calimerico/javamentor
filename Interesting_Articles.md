@@ -15,3 +15,5 @@ In this article I would like to give you list of short interesting articles whic
 [Optional.of vs Optional.ofNullable](https://stackoverflow.com/questions/31696485/why-use-optional-of-over-optional-ofnullable/31696584)
 
 [Optional.orElse vs Optional.orElseGet](https://stackoverflow.com/questions/33170109/difference-between-optional-orelse-and-optional-orelseget)
+
+[Java Performance Notes: Autoboxing / Unboxing](https://dzone.com/articles/java-performance-notes-autoboxing-unboxing)

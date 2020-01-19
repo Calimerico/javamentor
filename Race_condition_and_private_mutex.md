@@ -121,6 +121,23 @@ public class FooThread implements Runnable {
 ```
 Second solution(change implementation of the ```list```):
 
+```
+public class FooThread implements Runnable {
+
+    private final List<Integer> numbers;
+
+    public FooThread(List<Integer> numbers) {
+        this.numbers = numbers;
+    }
+
+    @Override
+    public void run() {
+        for ( int i = 0 ; i < 1000 ; i++ ) {
+            numbers.add(i);
+        }
+    }
+}
+```
 **Note**: You don't need ```synchronized``` block in second solution. 
 ```
 public class Main {
@@ -143,6 +160,15 @@ public class Main {
         System.out.println(list.size());
     }
 }
+```
+You can also try to add number into list just if number is not present. ```synchronizedList``` 
+don't work in that case, you have to use ```synchronized``` block:
+```
+            synchronized (numbers) {
+                if(!numbers.contains(i)) {
+                    numbers.add(i);
+                }
+            }
 ```
 **Bonus**: Since you learned about ```synchronized``` block let me give you simple example how things can go wrong with it.
 
