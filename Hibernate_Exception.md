@@ -1,9 +1,8 @@
 ### SchemaManagementException: Export identifier [...] encountered more than once
 
-##### Problem
+# Problem
 
 Let's say we have those two classes:
-
 ```
 @Entity
 public class Foo {
@@ -57,5 +56,5 @@ Caused by: org.hibernate.tool.schema.spi.SchemaManagementException: Export ident
 	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:391) ~[spring-orm-5.2.2.RELEASE.jar:5.2.2.RELEASE]
 	... 20 common frames omitted
 ```
-As you can see <a href="https://stackoverflow.com/questions/42630661/sql-strings-added-more-than-once-for-tablename">here</a> problem is that more than one entity start with the same prefix(in our case ```Foo``` and ```FooDetails```)
-If we just rename ```FooDetails``` to ```Details```, it will work perfectly.
+As you can see <a href="https://stackoverflow.com/questions/42630661/sql-strings-added-more-than-once-for-tablename">here</a> problem is that more than one entity start with the same prefix(in our case `Foo` and `FooDetails`)
+If we just rename `FooDetails` to `Details`, it will work perfectly.

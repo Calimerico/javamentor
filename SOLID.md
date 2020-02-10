@@ -4,7 +4,7 @@ Let's say you have to create program that goes to your favorite website for conc
 those concerts into excel file. You would like to collect information only about future concerts.
  If concert is in the past, you would not like to scrap that concert.
 
-I used ```jsoup``` and ```apache poi``` for scraping from website and writing into excel file but that part is really
+I used `jsoup` and `apache poi` for scraping from website and writing into excel file but that part is really
 irrelevant.
 
 Now, this is our first try:
@@ -66,7 +66,7 @@ If we write unit test for this class and test fails, we don't know what is wrong
  }
  ```
  
-Responsibility of ```Concert``` class is to hold data about concert.
+Responsibility of `Concert` class is to hold data about concert.
  
  ```
  public interface Validator {
@@ -84,7 +84,8 @@ Responsibility of ```Concert``` class is to hold data about concert.
      }
  } 
  ```
- Responsibility of ```Validator``` is only to validate concert and tell us if concert is valid or not.
+ 
+ Responsibility of `Validator` is only to validate concert and tell us if concert is valid or not.
  As you can see we program to an interface so we can easily substitute our implementation later.
  
  
@@ -108,7 +109,8 @@ Responsibility of ```Concert``` class is to hold data about concert.
       }
   }
  ``` 
- Responsibility of ```Writer``` is to write our concerts somewhere. Our Excel implementation
+ 
+ Responsibility of `Writer` is to write our concerts somewhere. Our Excel implementation
  write our concerts to excel file.
  
  ```
@@ -130,7 +132,8 @@ Responsibility of ```Concert``` class is to hold data about concert.
    }
  }
  ```
- And finally responsibility of HtmlParser is just to parse concerts(it doesn't care about validation or writing into the file)
+ 
+ And finally responsibility of HtmlParser is just to parse concerts(it does n't care about validation or writing into the file)
  
  Now our program looks much better:
  
@@ -164,9 +167,10 @@ Responsibility of ```Concert``` class is to hold data about concert.
      }
  }
  ```
- If we want to test if validation is working we can test ```Validator``` class and be sure 
+ 
+ If we want to test if validation is working we can test `Validator` class and be sure 
  that we will not break anything else. If we want to change the way how data is written into 
- the excel file we just simply have to change ```ExcelWriter ``` class and we can be sure that everything 
+ the excel file we just simply have to change `ExcelWriter` class and we can be sure that everything 
  else is working properly.
  
  We resolved the problem but we have new one. Can you spot it?
@@ -195,11 +199,14 @@ Responsibility of ```Concert``` class is to hold data about concert.
      }
  }
  ```
- But our Scraper class can only work with ```JsoupHtmlParser``` and ```ExcelWriter```
- When we create out ```Scraper``` like this:
+ 
+ But our Scraper class can only work with `JsoupHtmlParser` and `ExcelWriter`
+ When we create out `Scraper` like this:
+ 
  ```
  Scraper scraper = new Scraper();
  ```
+ 
  we cannot specify which parser or writer we would like to use.
  
  If we want to have flexible Scraper we should do this:
@@ -209,12 +216,12 @@ Responsibility of ```Concert``` class is to hold data about concert.
  
      private final Validator validator;
      private final Writer writer;
-     private final Scraper scraper;
+     private final HtmlParser parser;
  
-     public Scraper(Validator validator, Writer writer, Scraper scraper) {
+     public Scraper(Validator validator, Writer writer, HtmlParser parser) {
          this.validator = validator;
          this.writer = writer;
-         this.scraper = scraper;
+         this.parser = parser;
      }
  
      public void scrapEvents() throws IOException {
@@ -224,7 +231,7 @@ Responsibility of ```Concert``` class is to hold data about concert.
          urlList.add("https://somewebsite.com/concert3");
          urlList.add("https://somewebsite.com/concert4");
          for ( int i = 0; i < urlList.size(); i++) {
-             List<Concert> concerts = scraper.scrap(urlList);
+             List<Concert> concerts = parser.parse(urlList);
              List<Concert> validConcerts = concerts
                      .stream()
                      .filter(validator::validate)
@@ -234,6 +241,7 @@ Responsibility of ```Concert``` class is to hold data about concert.
      }
  }
  ```
+ 
  Now we can specify new parser and writer when we create scraper:
  
  ``` Scraper scraper = new Scraper(new ValidatorImpl(), new JsonWriter(), new NewHtmlParser());```

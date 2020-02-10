@@ -1,6 +1,7 @@
 ### How would you tune this sql query?
 
 Imagine having index on ```person_id``` and you would like to perform query:
+
 ```select bank_account_number from bank_account where person_id = :1 or :1 is null```.
  
 Unfortunately, most databases are not storing `null` values into the index.

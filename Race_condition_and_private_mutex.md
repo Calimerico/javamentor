@@ -16,7 +16,9 @@ public class Main {
     }
 }
 ```
+
 and our thread that add numbers to the list:
+
 ```
 public class FooThread implements Runnable {
 
@@ -34,9 +36,11 @@ public class FooThread implements Runnable {
     }
 }
 ```
+
 Pause here and try to find as much as possible code smells and bugs and think how would you resolve them.
 
 Now, let's resolve those problems. :) If you run this code you will end up with this exception:
+
 ```
 Exception in thread "main" java.util.ConcurrentModificationException
 	at java.base/java.util.ArrayList$Itr.checkForComodification(Unknown Source)
@@ -46,15 +50,16 @@ Exception in thread "main" java.util.ConcurrentModificationException
 	at java.base/java.io.PrintStream.println(Unknown Source)
 	at com.Main.main(Main.java:39)
 ```
+
 This exception is thrown when you try to modify list (in this case add element into the list)
  while iterating through that list. You may think "but I am not iterating through my list" 
- but actually ```System.out.println``` called ```toString``` method of the ```list``` and if you take a look
- at the implementation of ```toString``` method in the ```AbstractCollection``` class you will notice there is iterating.
+ but actually `System.out.println` called `toString` method of the ```list``` and if you take a look
+ at the implementation of `toString` method in the `AbstractCollection` class you will notice there is iterating.
 
 Ok, let's give some time to that adding threads to finish their work so we can print elements when list is populated. 
-You may be tempted to call ```Thread.sleep(2000)``` method but this is wrong way. You cannot be sure that threads will finish their work in two seconds. Good way to solve this problem is calling ```thread.join()```. Now, your main thread will not proceed until thread where ```join``` method is called is not done. 
+You may be tempted to call `Thread.sleep(2000)` method but this is wrong way. You cannot be sure that threads will finish their work in two seconds. Good way to solve this problem is calling `thread.join()`. Now, your main thread will not proceed until thread where `join` method is called is not done. 
 
-#### IMPORTANT: Don't do this
+### IMPORTANT: Don't do this
 
 ```
 public class Main {
@@ -70,7 +75,8 @@ public class Main {
     }
 }
 ```
-This way, you essentially created single threaded application. When you call ```join``` method in first iteration, you cannot proceed to the second iteration while you thread from first iteration is not over. This is the way to go:
+
+This way, you essentially created single threaded application. When you call `join` method in first iteration, you cannot proceed to the second iteration while you thread from first iteration is not over. This is the way to go:
 
 ```
 public class Main {
@@ -94,12 +100,14 @@ public class Main {
     }
 }
 ```
-Now, you are not receiving ```ConcurrentModificationException``` but you can see that your list contains different number of elements every time you run your program. Your problem is that your program contains **race condition**.
 
-Problem is that more than one thread is trying to write to the same memory location at the same time(in our case it is ```list``` shared variable) so basically one thread override change of the other one.
- There are two ways how to prevent this. Introduce ```synchronized``` block or switch our ```list``` from ```ArrayList``` to some list implementation that is ```synchronized```.
+Now, you are not receiving `ConcurrentModificationException` but you can see that your list contains different number of elements every time you run your program. Your problem is that your program contains **race condition**.
 
-First solution(introduce ```synchronized``` block):
+Problem is that more than one thread is trying to write to the same memory location at the same time(in our case it is `list` shared variable) so basically one thread override change of the other one.
+ There are two ways how to prevent this. Introduce `synchronized` block or switch our `list` from `ArrayList` to some list implementation that is `synchronized`.
+
+First solution(introduce `synchronized` block):
+
 ```
 public class FooThread implements Runnable {
 
@@ -119,7 +127,8 @@ public class FooThread implements Runnable {
     }
 }
 ```
-Second solution(change implementation of the ```list```):
+
+Second solution(change implementation of the `list`):
 
 ```
 public class FooThread implements Runnable {
@@ -138,7 +147,9 @@ public class FooThread implements Runnable {
     }
 }
 ```
-**Note**: You don't need ```synchronized``` block in second solution. 
+
+**Note**: You don't need `synchronized` block in second solution. 
+
 ```
 public class Main {
     public static void main(String[] args) {
@@ -161,8 +172,10 @@ public class Main {
     }
 }
 ```
-You can also try to add number into list just if number is not present. ```synchronizedList``` 
-don't work in that case, you have to use ```synchronized``` block:
+
+You can also try to add number into list just if number is not present. `synchronizedList`
+don't work in that case, you have to use `synchronized` block:
+
 ```
             synchronized (numbers) {
                 if(!numbers.contains(i)) {
@@ -170,9 +183,10 @@ don't work in that case, you have to use ```synchronized``` block:
                 }
             }
 ```
-**Bonus**: Since you learned about ```synchronized``` block let me give you simple example how things can go wrong with it.
 
-Let's suppose we have class that holds one number and we can increment that number with method ```increment```:
+**Bonus**: Since you learned about `synchronized` block let me give you simple example how things can go wrong with it.
+
+Let's suppose we have class that holds one number and we can increment that number with method `increment`:
 
 ```
 public class ValueHolder {
@@ -215,7 +229,9 @@ public class Main {
 
 }
 ```
+
 UpdaterThread class: 
+
 ```
 public class UpdaterThread implements Runnable {
     
@@ -233,6 +249,7 @@ public class UpdaterThread implements Runnable {
     }
 }
 ```
+
 And everything is "working". But here is the problem.
 
 ```
@@ -257,12 +274,14 @@ public class EvilThread implements Runnable {
     }
 }
 ```
+
 This thread is just holding lock on ValueHolder so none else can acquire that lock. If we start that evil thread before we start other threads for incrementing, we are in trouble:
 
 ```
 Thread evilThread = new Thread(new EvilThread(valueHolder));
         evilThread.start();
 ```
+
 Resolving this is simple. Change ```ValueHolder``` class:
 
 ```
@@ -281,9 +300,10 @@ public class ValueHolder {
     }
 }
 ```
+
 Now, we are locking on private lock that no one else is having access to so evil thread cannot acquire it.
 
-#### Further reading 
+### Further reading 
 If this article was interesting for you, I would suggest you learn more about threads in three resources:
 
 - <a href="http://tutorials.jenkov.com/java-concurrency/index.html">Java Concurrency and Multithreading Tutorial</a>

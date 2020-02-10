@@ -1,7 +1,7 @@
-### Comapare performance of ```AtomicLong``` and ```LongAdder``` classes
+### Compare performance of AtomicLong and LongAdder classes
 
-```LongAdder``` class is added in Java 8. Official [Java docs](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/LongAdder.html)
-say: ```Under high contention, expected throughput of this class compared to AtomicLong is significantly higher, at the expense of higher space consumption.```
+`LongAdder` class is added in Java 8. Official [Java docs](https://docs.oracle.com/javase/8/docs/api/java/util/concurrent/atomic/LongAdder.html)
+say: `Under high contention, expected throughput of this class compared to AtomicLong is significantly higher, at the expense of higher space consumption.`
  
 Let's check that. I will create few threads and every thread
 will have task to increment number 10000000 times. Very simple code:
@@ -54,7 +54,8 @@ public class Main {
     }
 }
 ```
+
 I executed this program 3 times and on my machine 
-execution time when incrementing ```AtomicLong``` is 2119,2188,2180 and incrementing ```LongAdder```
-is 369,435,455. Thus, we can conclude that ```LongAdder``` class is much faster and should be favoured instead of
-```AtomicLong``` if we are fine with more space consumption.
+execution time when incrementing `AtomicLong` is 2119,2188,2180 and incrementing `LongAdder`
+is 369,435,455. Thus, we can conclude that `LongAdder` class is much faster and should be favoured instead of
+`AtomicLong` if we are fine with more space consumption.

@@ -6,16 +6,16 @@ indexing and database caching system.
 
 ##### Why we need SQL indexes? 
 
-Imagine your database have about 50 million records. ```10000``` of them have ```Smith```
+Imagine your database have about 50 million records. `10000` of them have `Smith`
 as they surname. How fast database can fetch records when you perform 
- ```select first_name,id from citizen where last_name  = 'Smith'``` query?
+ `select first_name,id from citizen where last_name  = 'Smith'` query?
 
 In this case, database don't have choice, it have to read every record, check condition and evict records that don't fit.
-Doing that is slow as hell. But if we add ```INDEX``` on ```last_name``` field,
+Doing that is slow as hell. But if we add `INDEX` on `last_name` field,
 query will perform much faster.
  
 ##### How index works
-Basically ```INDEX``` is just ```B-TREE``` where only on leaf nodes we store values.
+Basically `INDEX` is just `B-TREE` where only on leaf nodes we store values.
 We use other nodes just to find path to leaf nodes. In sql index tree every node have about 300 values. This number
 depends on lot of factors but for this simple tutorial you can say that it is 300. So in our case when we have an index and
 our table contains 50 million records, in 4 hops(300^3 = 27000000 and 300^4 = 8100000000, 50 milion is between those 2 values)

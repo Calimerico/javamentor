@@ -38,9 +38,11 @@ public class Foo {
     }
 }
 ```
+
 As you can see, it is a simple class that has one field. We implemented hashCode and equals methods properly. Two instances are same if their number field is same. So far so good.
 
 Now, take a look at this simple example.
+
 ```
 public class Main {
     public static void main(String[] args) {
@@ -62,5 +64,6 @@ public class Main {
     }
 }
 ```
+
 What do you think, what will be the output?
 Actually, you will end up with two same elements in Set.
