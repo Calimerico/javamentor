@@ -26,7 +26,7 @@ of the simplicity I chose this example.
 ![Publish/Subscribe mechanism kafka](pubsubkafka.png)
  
 You can assume that since every consumer can choose subset of messages from broker, we should separate
-messages on broker somehow. That is the reason why `topic` exist. This means that producers will send messages that are related to money transfer to topic named `moneyTransfer` and messages related to client visits will be sent to topic `clientVisits`. On the other hand, consumers will subscribe themselfs onlt to topics in which they are interested in. Important thing to understand here is that `topic` does not work like a `queue`. In `queue` if one consumer receive message from broker, no else consumer will ever receive that same message. In `Kafka`, `n` consumers can subscribe to topic and all of them will receive message.
+messages on broker somehow. That is the reason why `topic` exist. This means that producers will send messages that are related to money transfer to topic named `moneyTransfer` and messages related to client visits will be sent to topic `clientVisits`. On the other hand, consumers will subscribe themselfs only to topics in which they are interested in. Important thing to understand here is that `topic` does not work like a `queue`. In `queue` if one consumer receive message from broker, no else consumer will ever receive that same message. In `Kafka`, `n` consumers can subscribe to topic and all of them will receive message.
 
 #### What happens if consumer is temprorary down, are we gonna miss messages?
 Fortunately, we are not gonna miss any messages. `Kafka` keep messages in broker before deleting it. In case that our consumer was temporary down, we can recconect to kafka broker and keep reading messages.
