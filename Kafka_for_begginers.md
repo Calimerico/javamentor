@@ -35,11 +35,27 @@ Fortunately, we are not gonna miss any messages. `Kafka` keep messages in broker
 If there are 200 messages in broker and our consumer already read 100 messages, we would like to continue from 101th record, not from the beggining. For this purpose consumer must notify broker which messages he read already. From time to time, we notify broker "I processed 70th message for topic `moneyTransfer` ". When our consumer recconects, he can ask broker "Hey what is the last record that I processed before I crashed? This number "last record which I processed" is called `offset`. Actually, we remember `offset` per `partition` and not per `topic`. Let's see what is `partition`.
 
 #### What are partitions and why do we need them?
-Our application is successfull but still we see that our consumer read messages very slow. We would like to speed up our consumer somehow. Can we speed up consuming if we add new consumer? Two consumers will read messages much faster than one. Fortunately, this is possible. One consumer should read one subset of `topic` and second consumer should read second subset of `topic`. We see that we should split our `topic` on some subsets. And this is actually possible in `Kafka`. We split `topic` into `partitions`. As you can guess if we have five partitions it have sense to have two consumers(in this case one consumer will consumer two partitions and the other one will consume 3 partitions) but there is no sense having more than five consumers.
+Our application is successful, but still we see that our consumer read messages very slow.
+We would like to speed up our consumer somehow.
+Can we speed up consuming if we add new consumer?
+Two consumers will read messages much faster than one.
+Fortunately, this is possible.
+One consumer should read one subset of `topic` and second consumer should read second subset of `topic`.
+We see that we should split our `topic` on some subsets. And this is actually possible in `Kafka`.
+We split `topic` into `partitions`.
+As you can guess if we have five partitions it have sense to have two consumers(in this case one consumer will consumer two partitions and the other one will consume 3 partitions) but there is no sense having more than five consumers.
 
 #### `Apache Kafka` docs say that `Kafka` is distributed system. What that means?
-We can store kafka messages on multiple brokers(as you can see from the picture every broker contains two partitions).
+
+![Kafka partitions](distributedPartitions.png)
+
+We can store kafka messages on multiple brokers(as you can see from the picture above, every broker contains two partitions).
 This way kafka distributed partitions among brokers.
 
 #### What happens if one of brokers become unavailable?
-Are we gonna loose all messages from partitions that are placed on that broker? Fortunately, we can configure `Kafka` so we can be sure that we will not loose messages. We can replicate partitions on multiple brokers. For example, if we configure `replication factor` to be `3` we will have 3 copies of every partition on our brokers. Sure, this introduced some redundancy but that is the price of being fault tolerant.
+Are we gonna loose all messages from partitions that are placed on that broker?
+Fortunately, we can configure `Kafka` so we can be sure that we will not loose messages.
+We can replicate partitions on multiple brokers. For example, if we configure `replication factor` to be `3` we will have 3 copies of every partition on our brokers.
+
+
+Sure, this introduced some redundancy but that is the price of being fault tolerant.
