@@ -59,5 +59,13 @@ We can replicate partitions on multiple brokers. For example, if we configure `r
 
 ![Kafka replication](replication.png)
 
+This way, we have comfort to loose two brokers and we still have all our data.
+Maybe we think that messages on `topic 1` are really important and we really don't care a lot about messages on `topic 2`.
+If that is the case, we can configure `replication factor` for `topic 1` to be `2` and replication factor of `topic 2` to be `4`.
+If you would like to learn in details how replication works, here is article for you. 
 
 Sure, this introduced some redundancy but that is the price of being fault tolerant.
+
+#### Summary
+I think that would be it!
+If you want to try to setup kafka on your machine and to try to produce and consume some messages you can take a look at this article.
