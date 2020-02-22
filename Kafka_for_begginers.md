@@ -57,5 +57,7 @@ Are we gonna loose all messages from partitions that are placed on that broker?
 Fortunately, we can configure `Kafka` so we can be sure that we will not loose messages.
 We can replicate partitions on multiple brokers. For example, if we configure `replication factor` to be `3` we will have 3 copies of every partition on our brokers.
 
+![Kafka replication](replication.png)
+
 
 Sure, this introduced some redundancy but that is the price of being fault tolerant.
