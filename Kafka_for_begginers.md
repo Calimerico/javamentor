@@ -20,7 +20,7 @@ Banking application is divided into 5 services.
 `Service 1` is producing messages related to money transfer, `Service 2` is producing messages related to which links bank clients are
 visiting, `Service 3` is consuming messages related to money transfer `Service 4` is consuming messages from both topics and `Service 5` is consuming messages related to what bank clients visit.
 
-*Note*: One service can be both consumer and producer in the same time and kafka can have more than one broker but for the sake 
+**Note**: One service can be both consumer and producer in the same time and kafka can have more than one broker but for the sake 
 of the simplicity I chose this example.
 
 ![Publish/Subscribe mechanism kafka](pubsubkafka.png)
