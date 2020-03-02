@@ -19,7 +19,7 @@ After downloading, extract that file and go into that directory.
 ##### Start zookeper
 
 Before starting `kafka` you should have `zookeper` started.
-Start `zookeper` with command
+Start `zookeper` with command:
 
 `bin/zookeeper-server-start.sh config/zookeeper.properties`
 
