@@ -19,3 +19,6 @@ In this article I would like to give you list of short interesting articles whic
 [Java Performance Notes: Autoboxing / Unboxing](https://dzone.com/articles/java-performance-notes-autoboxing-unboxing)
 
 [Safe Publication and Safe Initialization in Java](https://shipilev.net/blog/2014/safe-public-construction/)
+
+
+[How exactly HTTPS (ssl) works](https://stackoverflow.com/questions/6241991/how-exactly-https-ssl-works)
