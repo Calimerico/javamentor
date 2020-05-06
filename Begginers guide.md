@@ -1,32 +1,31 @@
 
 ### Guide to improve code of beginners
 
-I really like to help people and often beginners ask me: 
+I like to help people and often beginners ask me: 
 "Hey I just started programming. Can you take a look at my code and tell me where I can improve?"
 
-I want to sum up things that I usually  correct in their code. Have in mind that this advices
-are meant for almost total beginners. Anyone who done programing more than six months for money
-, will not make this mistakes.
+I want to sum up things that I usually  correct in their code. Have in mind that this advice
+are meant for almost total beginners. Anyone who done programming more than six months for money, will not make these mistakes.
 
-# Write code on english language
-You should love and speak your language but when it comes to programming, english should be used.
+# Write code on English language
+You should love and speak your language but when it comes to programming, English should be used.
 # Use build tool
-I saw many times that beginners commit lib, dist, target etc. folders to the git. 
-Don't do that. There are plenty of choices when it comes to build tools like Maven, Gradle, Ant etc. 
-I suggest you Maven for the start because most of the tutorials use maven as build tool. When you learn Maven
-it will be easier for you to start following tutorials because every non trivial tutorial include some dependency and use maven.
+I saw many times that beginners commit lib, dist, target, etc. folders to the git. 
+Don't do that. There are plenty of choices when it comes to build tools like Maven, Gradle, Ant, etc. 
+I suggest you Maven for the start because most of the tutorials use maven as a build tool. When you learn Maven
+it will be easier for you to start following tutorials because every nontrivial tutorial include some dependency and use maven.
 # Use source control(and use it properly)
-Zipping your project and sending like that is not a good idea. It is much better to use source control like Git, SVN, TFS etc.
+Zipping your project and sending it like that is not a good idea. It is much better to use source control like Git, SVN, TFS, etc.
 Be careful what you commit. Don't commit `.idea` files, `.settings` files, `.metadata` etc.
-Your commit messages should have sense at least. Commit messages like "I FIXED IT" are not good(although we all do write this kind of messages from time to time :) )
+Your commit messages should have a sense at least. Commit messages like "I FIXED IT" are not good(although we all do write this kind of messages from time to time :) )
 
 # Write unit and integration tests
-Tests can show you if your code have bug and also it acts as a documentation.
+Tests can show you if your code has a bug and also it acts as documentation.
 If someone wants to see how to use your class it will be much easier for that person to take
-a look at test and see how class should be used.
+a look at the test and see how the class should be used.
 
 # Start using javax.validation annotations
-Imagine creating method for sending http request to some external url. Params `url` and `method`
+Imagine creating a method for sending an HTTP request to some external URL. Params `url` and `method`
 are mandatory and you should receive `Exception` if you pass `null`.
 
 ```
@@ -45,14 +44,14 @@ public void sendRestCall(@NotNull String url, @NotNull String method) {
 }
 ```
 
-This way when someone try to call you method like this:
+This way when someone tries to call your method like this:
 
 ```
 obj.sendRestCall(null,"method")
 ```
 
-your `IDE` will give you warning that you are calling method with `null` param. Also
-`requireNonNull` method will throw `NullPointerException` if you pass null value to method.
+your `IDE` will give you a warning that you are calling a method with `null` param. Also,
+`requireNonNull` method will throw `NullPointerException` if you pass null value to the method.
 
 # Close your resources. Use try with resources block
 Consider this code:
