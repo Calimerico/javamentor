@@ -2,34 +2,34 @@
 
 ### Goals of the article
 
-1. We will show you how to take a snapshot from existing database
-2. Generate new migration script for every small change after initial snapshot(whenever you add column, add table etc.) 
-3. How to generate migration scripts for small changes based on change in hibernate entity classes(with maven/gradle plugin)
+1. We will show you how to take a snapshot from an existing database
+2. Generate a new migration script for every small change after the initial snapshot(whenever you add a column, add a table, etc.) 
+3. How to generate migration scripts for small changes based on the change in hibernate entity classes(with maven/gradle plugin)
 4. Applying those migration scripts to the database
 
 ### Install and configure liquibase
 
-If you work without help of maven/gradle plugin you need to install `liquibase`. Why would you work without one of those plugins?
-Well, maybe you are not familiar with maven/gradle(you are devops for example) or you don't have access for source code.
+If you work without the help of maven/gradle plugin you need to install `liquibase`. Why would you work without one of those plugins?
+Well, maybe you are not familiar with maven/gradle(you are devops for example) or you don't have access to source code.
 
 Command for installing `liquibase` : `sudo snap install liquibase`
-Now just download [this](https://www.liquibase.org/download) and extract.
+Now just download [this](https://www.liquibase.org/download) and extract it.
 
 
-You will notice that in root of extracted folder there is `lib` folder. In that `lib` folder you need to add `.jar` of your database driver.
+You will notice that in the root of the extracted folder there is `lib` folder. In that `lib` folder you need to add `.jar` of your database driver.
 
 
 Navigate to `examples/xml` folder (You can also navigate to to `sql` folder and work with that king of changes but in this tutorial we will cover `xml` way) . 
 In `examples/xml`, you will find `liquibase.properties`.
 
-Now, you can either change values of properties in this `liquibase.properties` file or pass those properties through command line(what's easier for you).
+Now, you can either change the values of properties in this `liquibase.properties` file or pass those properties through the command line(what's easier for you).
 In this case, let's change the file.
-Open that file and change next properties: `url`, `username`, `password`, `referenceUrl`, `referenceUsername`, `referencePassword`.
+Open that file and change the next properties: `url`, `username`, `password`, `referenceUrl`, `referenceUsername`, `referencePassword`.
 Also, you need to add `classpath: ../../lib/<YOUR-DRIVER>.jar` . Make sure that you replace `<YOUR-DRIVER>.jar` with name of the real driver(you added your `.jar` inside `lib` folder, didn't you).
 
 ### Get database snapshot and apllying that snapshot in another db
 
-Execute `liquibase --changeLogFile=snapshot.xml generateChangeLog` and you will get snapshot of your database schema inside `snapshot.xml` file.
+Execute `liquibase --changeLogFile=snapshot.xml generateChangeLog` and you will get a snapshot of your database schema inside `snapshot.xml` file.
 
 As you see, this time we didn't changed `changeLogFile` property but passed it through params of the command.
 
