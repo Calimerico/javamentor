@@ -212,3 +212,24 @@ Now, difference between db and hibernate can be generated with: `mvn clean insta
 As you might guess, generating db snapshot with plugin is straightforward: `mvn clean install -Dmaven.test.skip=true liquibase:generateChangeLog`
 
 Applying changes to db: `mvn clean install -Dmaven.test.skip=true liquibase:update` (you just need to specify `changeLogFile` through params or by changing `liquibase.properties`)
+
+If you want to insert some data from  `.csv` file, you just need another migration script which should look something like this(assume we are importing 3 fields from csv to db):
+
+```
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.0.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+    <changeSet author="spasoje" id="45">
+        <loadData
+                file="loaddata.csv"
+                relativeToChangelogFile="true"
+                tableName = "zipcode" >
+            <column header="zipcode" name="zipcode" type="string"/>
+            <column header="latitude" name="latitude" type="numeric"/>
+            <column header="latitude" name="longitude" type="numeric"/>
+        </loadData>
+    </changeSet>
+</databaseChangeLog>
+
+```
+
+You can apply this data insert change the same way as you did for any other before. Unfortunately, inserting data this way with `liquibase` is possible only from `.csv` file(json, xml or any other formats are not supported).
