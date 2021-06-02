@@ -5,6 +5,7 @@
 1. We will show you how to take a snapshot from existing database
 2. Generate new migration script for every small change after initial snapshot(whenever you add column, add table etc.) 
 3. How to generate migration scripts for small changes based on change in hibernate entity classes(with maven/gradle plugin)
+4. Applying those migration scripts to the database
 
 ### Install and configure liquibase
 
