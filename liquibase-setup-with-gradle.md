@@ -165,31 +165,31 @@ The similar thing that can be done with gradle, can be done through maven. You j
 
 ```
 <plugin>
-				<groupId>org.liquibase</groupId>
-				<artifactId>liquibase-maven-plugin</artifactId>
-				<version>4.0.0</version>
-				<configuration>
-					<diffChangeLogFile>${diffChangeLogFile}</diffChangeLogFile>
-					<propertyFile>src/main/resources/liquibase.properties</propertyFile>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.liquibase.ext</groupId>
-						<artifactId>liquibase-hibernate5</artifactId>
-						<version>4.0.0</version>
-					</dependency>
-					<dependency>
-						<groupId>org.springframework.boot</groupId>
-						<artifactId>spring-boot-starter-data-jpa</artifactId>
-						<version>${project.parent.version}</version>
-					</dependency>
-					<dependency>
-						<groupId>javax.validation</groupId>
-						<artifactId>validation-api</artifactId>
-						<version>2.0.1.Final</version>
-					</dependency>
-				</dependencies>
-			</plugin>
+	<groupId>org.liquibase</groupId>
+	<artifactId>liquibase-maven-plugin</artifactId>
+	<version>4.0.0</version>
+	<configuration>
+		<diffChangeLogFile>${diffChangeLogFile}</diffChangeLogFile>
+		<propertyFile>src/main/resources/liquibase.properties</propertyFile>
+	</configuration>
+	<dependencies>
+		<dependency>
+			<groupId>org.liquibase.ext</groupId>
+			<artifactId>liquibase-hibernate5</artifactId>
+			<version>4.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>${project.parent.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>2.0.1.Final</version>
+		</dependency>
+	</dependencies>
+</plugin>
 ```
 Also, with maven plugin you need this `liquibase.properties`:
 
