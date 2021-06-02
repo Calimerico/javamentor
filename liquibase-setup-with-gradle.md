@@ -19,7 +19,7 @@ Now just download [this](https://www.liquibase.org/download) and extract.
 You will notice that in root of extracted folder there is `lib` folder. In that `lib` folder you need to add `.jar` of your database driver.
 
 
-Navigate to `examples/xml` folder. (You can also navigate to to `sql` folder and work with that king of changes but in this tutorial we will cover `xml` way)
+Navigate to `examples/xml` folder (You can also navigate to to `sql` folder and work with that king of changes but in this tutorial we will cover `xml` way) . 
 In `examples/xml`, you will find `liquibase.properties`.
 
 Now, you can either change values of properties in this `liquibase.properties` file or pass those properties through command line(what's easier for you).
