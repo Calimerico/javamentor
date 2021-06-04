@@ -154,6 +154,10 @@ dependencies {
 ```
 Of course, you need to change things inside `main` activity to match your url, db driver etc. Don't forget to change `com.example` to the package where your hibernate entities reside.
 
+**NOTE** If you have troubles with running this commands make sure that your dependencies versions are fine. For example, I had a problem that I was receiving `NullPointerException` with `diffChangeLog` command, and then I switched `liquibase-core` to 3.8.1 and it started to to work.
+
+Also, if you receive FileNotFoundException, make sure that you don't have some permission issues. Safest way to go is to manually create all folders where your scripts reside and then you can start this commands.
+
 Now, you can run this command: `./gradlew diffChangeLog -PrunList=main` and this command will give you the difference between database schema and hibernate entities.
 
 Command `./gradlew generateChangelog` will generate db snapshot for you.
