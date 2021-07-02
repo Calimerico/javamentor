@@ -1,5 +1,7 @@
 ### SOLID principles - Explanation and real world example
 
+#### Single Responsibility principle - one class should have one responsibility
+
 Let's say you have to create program that goes to your favorite website for concerts and write information about
 those concerts into excel file. You would like to collect information only about future concerts.
  If concert is in the past, you would not like to scrap that concert.
@@ -133,7 +135,7 @@ Responsibility of `Concert` class is to hold data about concert.
  }
  ```
  
- And finally responsibility of HtmlParser is just to parse concerts(it does n't care about validation or writing into the file)
+ And finally responsibility of HtmlParser is just to parse concerts(it doesn't care about validation or writing into the file)
  
  Now our program looks much better:
  
@@ -175,6 +177,8 @@ Responsibility of `Concert` class is to hold data about concert.
  
  We resolved the problem but we have new one. Can you spot it?
  
+ #### Dependency inversion principle - class should not care about instantiating it's dependencies
+ 
  We are violating **Dependency inversion principle**. Imagine that instead of writing into
  excel file we would like to save our concerts as json file and that we see that we don't like
  jsoup library and instead we would like to use some other library for connecting to the website
@@ -200,16 +204,14 @@ Responsibility of `Concert` class is to hold data about concert.
  }
  ```
  
- But our Scraper class can only work with `JsoupHtmlParser` and `ExcelWriter`
+ But our Scraper class can only work with `JsoupHtmlParser` and `ExcelWriter`.
  When we create out `Scraper` like this:
  
  ```
  Scraper scraper = new Scraper();
  ```
  
- we cannot specify which parser or writer we would like to use.
- 
- If we want to have flexible Scraper we should do this:
+ we cannot specify which parser or writer we would like to use. If we want to have flexible Scraper we should do this:
  
  ```
  public class Scraper {
@@ -245,6 +247,8 @@ Responsibility of `Concert` class is to hold data about concert.
  Now we can specify new parser and writer when we create scraper:
  
  ``` Scraper scraper = new Scraper(new ValidatorImpl(), new JsonWriter(), new NewHtmlParser());```
+ `Scraper` does not care about it's own dependencies now, it's client class now who has control.
+  Client class controlls which implementation of `Validator`, `Writer` and `Parser` will be used.
  
  
  
