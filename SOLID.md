@@ -1,4 +1,4 @@
-### SOLID principles - Real world example
+### SOLID principles - Explanation and real world example
 
 Let's say you have to create program that goes to your favorite website for concerts and write information about
 those concerts into excel file. You would like to collect information only about future concerts.
