@@ -249,8 +249,77 @@ Responsibility of `Concert` class is to hold data about concert.
  ``` Scraper scraper = new Scraper(new ValidatorImpl(), new JsonWriter(), new NewHtmlParser());```
  `Scraper` does not care about it's own dependencies now, it's client class now who has control.
   Client class controlls which implementation of `Validator`, `Writer` and `Parser` will be used.
- 
- 
- 
- 
- 
+  
+  #### Liskov substitution principle - if class A extends class B, we should be able to replace B with A without breaking our app
+  
+  Let's first see almost ideal example of Liskov principle violation(taken from [here](https://stackoverflow.com/questions/22050848/do-collections-unmodifiablexxx-methods-violate-lsp))
+
+```
+class SomeClass{
+      public List<Integer> list(){
+           return new ArrayList<Integer>();
+      }
+}
+```
+and
+```
+class SomeClass{
+     public List<Integer> list(){
+           return Collections.unmodifiableList(new ArrayList<Integer>());
+     }
+}
+```
+Now, it seems like our clients will have surprising behaviours if we return then unmodifiable version of the list. And this would really be great example of violation of Liskov principle. Depending on the class implementation, class can have surprising behavior, it throws some unexpected exception. Why this is not the violation of the principle? Take a close look at `add` method signature and pay attention that actually it sais it can throw `UnsupportedOperationException`:
+
+```
+/**
+     * Ensures that this collection contains the specified element (optional
+     * operation).  Returns {@code true} if this collection changed as a
+     * result of the call.  (Returns {@code false} if this collection does
+     * not permit duplicates and already contains the specified element.)<p>
+     *
+     * Collections that support this operation may place limitations on what
+     * elements may be added to this collection.  In particular, some
+     * collections will refuse to add {@code null} elements, and others will
+     * impose restrictions on the type of elements that may be added.
+     * Collection classes should clearly specify in their documentation any
+     * restrictions on what elements may be added.<p>
+     *
+     * If a collection refuses to add a particular element for any reason
+     * other than that it already contains the element, it <i>must</i> throw
+     * an exception (rather than returning {@code false}).  This preserves
+     * the invariant that a collection always contains the specified element
+     * after this call returns.
+     *
+     * @param e element whose presence in this collection is to be ensured
+     * @return {@code true} if this collection changed as a result of the
+     *         call
+     * @throws UnsupportedOperationException if the {@code add} operation
+     *         is not supported by this collection
+     * @throws ClassCastException if the class of the specified element
+     *         prevents it from being added to this collection
+     * @throws NullPointerException if the specified element is null and this
+     *         collection does not permit null elements
+     * @throws IllegalArgumentException if some property of the element
+     *         prevents it from being added to this collection
+     * @throws IllegalStateException if the element cannot be added at this
+     *         time due to insertion restrictions
+     */
+    boolean add(E e);
+```
+So, unmodifiable collection is not throwing some random unexpected Exception, it is stated that `UnsupportedOperationException` may be thrown. *You can switch implementations of the list and your app will still behave correctly(as defined in contract)*
+
+Let's say you have this situation:
+```
+class A {
+  List<String> strings;
+}
+```
+
+```
+class B extends A {
+}
+```
+Now, when overriding your class, let's see what you **shouldn't do** in order not to break Liskov principle:
+- In class `B` you shouldn't throw some **exception** that is not specified in `A`
+- You shouldn't
