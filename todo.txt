@@ -1,0 +1,5 @@
+uml dijagrami u state i decorator patternu
+footeri koji linkuju ka mojim casovima svugde!
+table of contents svuda skoro
+linkovanje liskova iz state/decorator i obrnuto
+skinuti further readings
