@@ -21,6 +21,8 @@ Let's say that you are working in the car insurance company and this is your req
 
 We are creating damage processor service. Whenever our customer have an accident, he came to our app and fullfill some forms in some specific order to be able to get his money(something like wizard windows). 
 Here is an image that explains in which order client need to submit those forms:
+
+
 ![forms](state.png)
 
 We first need to populate formA, then formB, then C and D(C and D order is not important but it must be before formE) and then finally formE.
