@@ -1,4 +1,4 @@
-#### Decorator pattern explained
+### Decorator pattern explained
 
 ##### Table of Contents
 
