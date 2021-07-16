@@ -1,6 +1,6 @@
-### State pattern - real world example
+## State pattern - real world example
 
-##### Table of Contents
+#### Table of Contents
 
 
 [Explanation of the pattern](#state-pattern-explanation)  
@@ -9,13 +9,13 @@
 
 <a name="state-pattern-explanation"/>
 
-#### Explanation of the pattern
+### Explanation of the pattern
 
 Core idea of the state pattern is that **object change behaviour based on his state**. We will show, how it works on the example.
 
 <a name="example"/>
 
-#### Car insurance example
+### Car insurance example
 
 Let's say that you are working in the car insurance company and this is your requirement: 
 
@@ -25,9 +25,13 @@ Here is an image that explains in which order client need to submit those forms:
 
 ![forms](state.png)
 
-We first need to populate formA, then formB, then C and D(C and D order is not important but it must be before formE) and then finally formE.
+We first need to populate formA, then formB, then C and D(C and D order is not important, but it must be before formE) and then finally formE.
 
 This state machine problem is ideal for our state pattern. Let's see the code:
+
+Here is our UML diagram:
+
+![state-uml](stateuml.png)
 
 **Person** class:
 
@@ -154,7 +158,7 @@ Here, you need additional check to see if both C and D forms are submitted befor
 
 <a name="conclusion"/>
 
-#### Conclusion
+### Conclusion
 
 Notice in the example that if you add new state, add new rules about behaviour of the `Person` based on `PersonState`, you don't need to touch `Person` class.
  Also, your logic how `PersonState` influence behaviour of the `Person` is inside `PersonState`, not inside the `Person`. 
