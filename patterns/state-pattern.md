@@ -27,6 +27,12 @@ Here is an image that explains in which order client need to submit those forms:
 
 We first need to populate formA, then formB, then C and D(C and D order is not important, but it must be before formE) and then finally formE.
 
+There are few states in which our `Person` can be:
+- Person populating formA -> stateA
+- Person populating formB -> stateB
+- Person populating formC and formD -> stateCD
+- Person populating formE -> stateE
+
 This state machine problem is ideal for our state pattern. Let's see the code:
 
 Here is our UML diagram:

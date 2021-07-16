@@ -27,7 +27,7 @@ list.add("string3");
 List<String> unmodifiableList = new ArrayList<>(isImmutable, list);
 ```
 
-Well, it would work. But there are few disatvanges. First of all, you cannot change `ArrayList`(there is no constructor with this `boolean` immutable param). Even if you can, you need to implement this logic in every `List` implementation. Already sounds so bad, but there is even worse thing. If you add features like this(you might want to add synchronization feature inside `ArrayList` in the similar fashion) you will end up in a big mess very fast. You polluted your `ArrayList` with some weird logic for immutability. `ArrrayList` should not know anything about immutability.
+Well, it would work. But there are few disatvanges. First of all, you cannot change `ArrayList`(there is no constructor with this `boolean` immutable param and you are not Oracle developer who maintain Java). Even if you can, you need to implement this logic in every `List` implementation. Already sounds so bad, but there is even worse thing. If you add features like this(you might want to add synchronization feature inside `ArrayList` in the similar fashion) you will end up in a big mess very fast. You polluted your `ArrayList` with some weird logic for immutability. `ArrrayList` should not know anything about immutability.
 
 Let's try something better. This might be a good idea:
 
